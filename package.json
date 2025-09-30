@@ -1,0 +1,16 @@
+{
+  "name": "secondbrain",
+  "version": "1.0.0",
+  "description": "second brain app",
+  "license": "ISC",
+  "author": "smeet96",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@types/express": "^5.0.3",
+    "express": "^5.1.0"
+  }
+}
