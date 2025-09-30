@@ -6,4 +6,31 @@ datasource db {
 model User {
 id  Int @unique @default(autoincrement())
 name String 
+email String @unique 
+password String 
+content Content[]
+}
+
+model Content {
+  id Int @unique @default(autoincrement())
+  title String
+  description String
+  date DateTime
+  author User @relation(fields: [authorId] , references: [id])
+  authorId Int
+  category Category[]
+}
+
+model Category {
+  id Int @unique @default(autoincrement())
+  type type 
+  category Content @relation(fields: [contentId], references: [id])
+  contentId Int
+}
+
+enum type {
+  tweet
+  video
+  document
+  Link
 }

@@ -16,6 +16,9 @@ build/
 .DS_Store
 Thumbs.db
 
+# Prisma migrations
+prisma/migrations/
+
 # Environment variables
 .env
 .env.local
