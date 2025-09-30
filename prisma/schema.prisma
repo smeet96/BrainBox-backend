@@ -18,7 +18,7 @@ model Content {
   id Int @unique @default(autoincrement())
   title String
   description String
-  date DateTime
+  date DateTime? @default(now())
   author User @relation(fields: [authorId] , references: [id])
   authorId Int
   category Category[]
