@@ -8,7 +8,7 @@ app.use(express.json())
 dotenv.config()
 const pass = process.env.pass!
 
-app.use("api/v1/content/" , async (req,res,next) => {
+app.use("/api/v1/content/" , async (req,res,next) => {
 const authorization = req.headers.authorization
 
 if(!authorization){return res.json({"msg" : "did not get authorization headers "})}
@@ -16,8 +16,8 @@ if(!authorization){return res.json({"msg" : "did not get authorization headers "
 const auth = authorization.split(" ")[1]
 
 try {
-    const decode = jwt.verify(auth , pass) as {email : string}
-   req.body.email = decode.email
+    const decode = jwt.verify(auth , pass) as {userId : string}
+   req.body.id = decode.userId
     next() 
 } catch (error) {
     console.log(error)

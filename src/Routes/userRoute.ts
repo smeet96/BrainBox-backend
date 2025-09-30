@@ -40,8 +40,8 @@ userRouter.post("/signin", async (req,res)=> {
     })
 
     if(!signin){return res.json({"msg" : "email not found"})}
-    const email = body.email
-    const token = jwt.sign({email} , pass )
+    const userId = signin.id
+    const token = jwt.sign({userId} , pass )
     res.json(token)
 })
 
