@@ -1,4 +1,4 @@
-import express from "express"
+import express, { Request } from "express"
 import jwt from "jsonwebtoken"
 import userRouter from "./Routes/userRoute"
 import contentRouter from "./Routes/contentRoute"
@@ -7,6 +7,14 @@ const app = express()
 app.use(express.json())
 dotenv.config()
 const pass = process.env.pass!
+
+declare global {
+  namespace Express {
+    interface Request {
+      id?: string;
+    }
+  }
+}
 
 app.use("/api/v1/content/" , async (req,res,next) => {
 const authorization = req.headers.authorization
@@ -17,7 +25,7 @@ const auth = authorization.split(" ")[1]
 
 try {
     const decode = jwt.verify(auth , pass) as {userId : string}
-   req.body.id = decode.userId
+   req.id = decode.userId 
     next() 
 } catch (error) {
     console.log(error)
