@@ -22,7 +22,7 @@ declare global {
 app.use("/api/v1/content/" , async (req,res,next) => {
 const authorization = req.headers.authorization
 
-if(!authorization){return res.json({"msg" : "did not get authorization headers "})}
+if(!authorization){return res.status(500).json({"msg" : "did not get authorization headers "})}
 
 const auth = authorization.split(" ")[1]
 
