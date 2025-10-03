@@ -29,7 +29,7 @@ if (!body){
 userRouter.post("/signin", async (req,res)=> {
     const body = req.body
     if(!body){
-        return res.json({"msg" : "send credentials"})
+        return res.status(411).json({"msg" : "send credentials"})
     }
 
     const signin = await prisma.user.findFirst({
@@ -39,10 +39,10 @@ userRouter.post("/signin", async (req,res)=> {
         }
     })
 
-    if(!signin){return res.json({"msg" : "email not found"})}
+    if(!signin){return res.status(401).json({"msg" : "Invalid Credentials"})}
     const userId = signin.id
     const token = jwt.sign({userId} , pass )
-    res.json(token)
+    res.json({token : token})
 })
 
 export default userRouter
