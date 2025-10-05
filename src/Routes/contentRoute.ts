@@ -13,8 +13,12 @@ contentRouter.post("/create", async (req,res) => {
         data : {
             title,
             description,
-            category,
             authorId,
+            category: {
+          create: category.map((cat:any) => ({
+            type: cat.type
+          }))
+        }
         }
     })
     if(!content){return res.status(500).json("error while creating content")}
@@ -23,6 +27,7 @@ contentRouter.post("/create", async (req,res) => {
 
 contentRouter.get("/get" , async (req,res)=> {
     const authorId = Number(req.id)
+    if(!authorId) {return res.status(411).json("token not found")}
     const contents = await prisma.content.findMany({
         where:{
             authorId : authorId
