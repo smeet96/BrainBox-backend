@@ -44,4 +44,28 @@ contentRouter.get("/get" , async (req,res)=> {
     return res.status(200).json(contents)
 })
 
+contentRouter.delete("/delete/:id", async(req,res) => {
+const id = Number(req.params.id)
+console.log(id)
+if(!id) {
+    return res.status(411).json("did not find id")
+}
+const del = await prisma.content.delete({
+    where : {
+   id
+    }
+})
+
+console.log(del)
+
+if(!del){
+    return res.status(500).json("error while deleting content")
+}
+
+ return res.status(200).json("content deleted")
+
+})
+
+
+
 export default contentRouter

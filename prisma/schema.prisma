@@ -19,7 +19,7 @@ model Content {
   title String
   description String
   date DateTime? @default(now())
-  author User @relation(fields: [authorId] , references: [id])
+  author User @relation(fields: [authorId] , references: [id] , onDelete: Cascade , onUpdate: Cascade)
   authorId Int
   category Category[]
 }
@@ -27,7 +27,7 @@ model Content {
 model Category {
   id Int @unique @default(autoincrement())
   type type 
-  category Content @relation(fields: [contentId], references: [id])
+  category Content @relation(fields: [contentId], references: [id] , onDelete: Cascade , onUpdate: Cascade )
   contentId Int
 }
 
